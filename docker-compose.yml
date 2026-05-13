@@ -1,0 +1,29 @@
+
+services:
+  # Servicio de la Base de Datos
+  db:
+    image: postgres:15
+    container_name: amsound_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=amsound_db
+      - POSTGRES_USER=usuario_usac
+      - POSTGRES_PASSWORD=password_seguro
+
+  # Servicio de la App Django
+  web:
+    build: .
+    container_name: amsound_web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgres://usuario_usac:password_seguro@db:5432/amsound_db
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:

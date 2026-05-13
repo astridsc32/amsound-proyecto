@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Login - AM Sound</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #1a1a1a 0%, #343a40 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .card {
+            border-radius: 15px;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: #0d6efd;
+            border: none;
+        }
+
+        .text-divider {
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: #6c757d;
+        }
+
+            .text-divider::before, .text-divider::after {
+                content: '';
+                flex: 1;
+                border-bottom: 1px solid #dee2e6;
+            }
+
+            .text-divider:not(:empty)::before {
+                margin-right: .5em;
+            }
+
+            .text-divider:not(:empty)::after {
+                margin-left: .5em;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 col-lg-4">
+                <div class="card shadow-lg">
+                    <div class="card-body p-5">
+                        <div class="text-center mb-4">
+                            <h2 class="fw-bold text-dark">AM Sound</h2>
+                            <p class="text-muted">Gestión y Solicitud de Audio Profesional</p>
+                        </div>
+
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show small" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        {% endfor %}
+                        {% endif %}
+
+                        <form method="POST">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Correo Electrónico</label>
+                                <input type="email" name="correo" class="form-control" placeholder="usuario@correo.com" required>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label small fw-bold">Contraseña</label>
+                                <input type="password" name="password" class="form-control" placeholder="••••••••" required>
+                            </div>
+
+                            <div class="mb-4 text-end">
+                                <a href="{% url 'recuperar_password' %}" class="text-decoration-none small text-primary">¿Olvidaste tu contraseña?</a>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary w-100 btn-lg shadow-sm mb-3">Entrar al Sistema</button>
+                        </form>
+
+                        <div class="text-divider my-3">O INGRESA CON</div>
+
+                        <a href="{% url 'login_facial' %}" class="btn btn-outline-info w-100 d-flex align-items-center justify-content-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-camera-fill me-2" viewBox="0 0 16 16">
+                                <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z" />
+                                <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z" />
+                            </svg>
+                            Reconocimiento Facial
+                        </a>
+
+                        <div class="mt-4 text-center">
+                            <p class="mb-0 small text-muted">¿No tienes cuenta?</p>
+                            <a href="{% url 'registro' %}" class="text-decoration-none fw-bold">Regístrate aquí</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+﻿Django==4.2.7
+Pillow==10.1.0
+opencv-python-headless==4.8.1.78
+numpy==1.26.4
+psycopg2-binary==2.9.9
+requests==2.31.0
+asgiref==3.7.2
+sqlparse==0.4.4
+tzdata==2023.3
